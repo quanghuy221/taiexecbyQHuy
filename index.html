@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Web tải Executor by Huy - Ultimate Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: #030712;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* VIDEO NỀN & OVERLAY CINEMATIC CHILL */
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 1;
+            filter: blur(8px) brightness(0.4) contrast(1.2); 
+            transform: scale(1.1);
+            pointer-events: none;
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(13, 148, 136, 0.15) 0%, transparent 70%),
+                rgba(3, 7, 18, 0.75);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* HIỆU ỨNG HẠT ÁNH SÁNG BAY LƠ LỬNG (MAGIC PARTICLES) */
+        .particle {
+            position: fixed;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 3;
+            box-shadow: 0 0 12px rgba(129, 140, 248, 0.9), 0 0 20px rgba(52, 211, 153, 0.6);
+            animation: floatParticle linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(105vh) translateX(0) scale(0.2); opacity: 0; }
+            20% { opacity: 0.8; transform: translateY(80vh) translateX(15px) scale(1); }
+            80% { opacity: 0.8; transform: translateY(20vh) translateX(-15px) scale(0.8); }
+            100% { transform: translateY(-10vh) translateX(25px) scale(0.2); opacity: 0; }
+        }
+
+        /* ĐỒNG HỒ SANG TRỌNG CÓ HIỆU ỨNG NEON GLOW */
+        .clock-wrapper {
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            z-index: 100;
+            animation: clockFloat 4s ease-in-out infinite;
+        }
+
+        .live-clock {
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid rgba(129, 140, 248, 0.3);
+            backdrop-filter: blur(25px);
+            padding: 10px 18px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(99, 102, 241, 0.25);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+        }
+
+        .live-clock:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: rgba(30, 41, 59, 0.9);
+            border-color: rgba(129, 140, 248, 0.8);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 30px rgba(129, 140, 248, 0.5);
+        }
+
+        .live-clock i {
+            color: #818cf8;
+            font-size: 1.1rem;
+            transition: transform 0.5s ease;
+            text-shadow: 0 0 10px rgba(129, 140, 248, 0.8);
+        }
+
+        .live-clock:hover i {
+            transform: rotate(360deg) scale(1.2);
+            color: #c7d2fe;
+        }
+
+        .clock-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        #vietnam-date { font-size: 0.7rem; color: rgba(255, 255, 255, 0.7); font-weight: 500; }
+        #vietnam-time { font-size: 0.95rem; font-weight: 700; letter-spacing: 0.5px; text-shadow: 0 0 8px rgba(255,255,255,0.4); }
+
+        @keyframes clockFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* CONTAINER CHÍNH VỚI VIỀN XOAY CONIC GRADIENT CỰC COOL */
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 450px;
+            max-height: 88vh;
+            margin: 20px;
+            background: rgba(10, 15, 30, 0.82);
+            border-radius: 34px;
+            padding: 3px; /* Dành chỗ cho viền xoay */
+            animation: containerEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), 0 0 50px rgba(99, 102, 241, 0.25);
+            overflow: hidden;
+        }
+
+        /* Viền sáng xoay tự động quanh khung */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg at 50% 50%, #6366f1 0deg, #10b981 120deg, #38bdf8 240deg, #6366f1 360deg);
+            animation: rotateBorder 6s linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes rotateBorder {
+            100% { transform: rotate(360deg); }
+        }
+
+        .container-inner {
+            position: relative;
+            z-index: 2;
+            background: rgba(11, 16, 32, 0.95);
+            border-radius: 32px;
+            padding-top: 28px;
+            height: 100%;
+            max-height: calc(88vh - 6px);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        @keyframes containerEntry {
+            from { opacity: 0; transform: translateY(40px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* TIÊU ĐỀ ANIMATION GRADIENT VÀ NEON SHADOW */
+        .header-title {
+            padding: 0 28px;
+            margin-bottom: 16px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .header-title h1 {
+            font-size: 1.7rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, #ffffff 0%, #c7d2fe 35%, #818cf8 70%, #38bdf8 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shineTitle 4s linear infinite;
+            text-shadow: 0 0 30px rgba(129, 140, 248, 0.5);
+        }
+
+        @keyframes shineTitle {
+            to { background-position: 200% center; }
+        }
+
+        .header-title p {
+            font-size: 0.83rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+        }
+
+        /* HUY HIỆU GHI CHÚ GLOWING */
+        .note-badge {
+            margin: 12px auto 0 auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(129, 140, 248, 0.12);
+            border: 1px solid rgba(129, 140, 248, 0.35);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: #c7d2fe;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(129, 140, 248, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .note-badge:hover {
+            background: rgba(129, 140, 248, 0.25);
+            border-color: rgba(129, 140, 248, 0.7);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(129, 140, 248, 0.4);
+        }
+
+        .note-badge i {
+            color: #38bdf8;
+            font-size: 0.8rem;
+            animation: pulseIcon 2s infinite;
+        }
+
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.25); opacity: 0.7; }
+        }
+
+        /* KHUNG CUỘN NỘI DUNG */
+        .button-scroll-area {
+            flex-grow: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 0 24px;
+            scrollbar-width: none;
+        }
+
+        .button-scroll-area::-webkit-scrollbar { display: none; }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding-bottom: 24px;
+        }
+
+        /* KÍCH THƯỚC ICON ẢNH AN TOÀN */
+        .btn img, .button-group img {
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 50% !important;
+            object-fit: cover !important;
+            object-position: center !important;
+            border: 2px solid rgba(255, 255, 255, 0.3) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6) !important;
+            background: rgba(0, 0, 0, 0.6) !important;
+            padding: 1px !important;
+            flex-shrink: 0 !important;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+            pointer-events: none;
+        }
+
+        /* NÚT BẤM HIỆU ỨNG CYBERPUNK GLOW HOVER */
+        .btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.93rem;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            cursor: pointer;
+        }
+
+        /* Hiệu ứng tia sáng lướt qua nút */
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 70%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            transform: skewX(-25deg);
+        }
+
+        .btn:hover::before {
+            left: 140%;
+            transition: all 0.75s ease-in-out;
+        }
+
+        .btn:nth-child(1) { animation-delay: 0.08s; }
+        .btn:nth-child(2) { animation-delay: 0.16s; }
+        .btn:nth-child(3) { animation-delay: 0.24s; }
+        .btn:nth-child(4) { animation-delay: 0.32s; }
+        .btn:nth-child(5) { animation-delay: 0.40s; }
+        .btn:nth-child(6) { animation-delay: 0.48s; }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-other:hover {
+            background: rgba(99, 102, 241, 0.15);
+            border-color: rgba(129, 140, 248, 0.7);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-other:hover img {
+            transform: scale(1.15) rotate(8deg) !important;
+            border-color: rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 0 0 20px rgba(129, 140, 248, 0.8) !important;
+        }
+
+        .btn:active {
+            transform: translateY(1px) scale(0.98) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        .btn-content-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            z-index: 2;
+        }
+
+        .btn i.arrow-right {
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 0.95rem;
+            z-index: 2;
+        }
+
+        .btn:hover i.arrow-right {
+            color: #38bdf8;
+            transform: translateX(6px) scale(1.2);
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+        }
+
+        /* ===== MODAL POPUP ULTRA CHILL & COOL ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(18px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: rgba(13, 19, 36, 0.96);
+            border: 1px solid rgba(129, 140, 248, 0.35);
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.95), 0 0 60px rgba(99, 102, 241, 0.35);
+            border-radius: 34px;
+            padding: 28px;
+            width: 92%;
+            max-width: 420px;
+            position: relative;
+            transform: scale(0.8) translateY(30px);
+            transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(239, 68, 68, 0.9);
+            color: #ffffff;
+            border-color: transparent;
+            transform: rotate(90deg) scale(1.15);
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-right: 32px;
+        }
+
+        .modal-header img {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(129, 140, 248, 0.8);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 20px rgba(99, 102, 241, 0.5);
+            pointer-events: none;
+        }
+
+        .modal-header-text {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .modal-header h2 {
+            color: #ffffff;
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .modal-header span.subtitle {
+            font-size: 0.72rem;
+            color: #818cf8;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 8px rgba(129, 140, 248, 0.6);
+        }
+
+        /* BỐ CỤC 3 Ô CHỈ SỐ NẰM NGANG */
+        .modal-body-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.025);
+            padding: 14px 10px;
+            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .info-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(15, 23, 42, 0.85);
+            padding: 12px 6px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-align: center;
+            min-width: 0;
+        }
+
+        .info-card:hover {
+            border-color: rgba(129, 140, 248, 0.6);
+            transform: translateY(-3px);
+            background: rgba(30, 41, 59, 0.95);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4), 0 0 15px rgba(129, 140, 248, 0.2);
+        }
+
+        .info-card i {
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
+
+        .info-card.unc-card i { color: #38bdf8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.6); }
+        .info-card.sunc-card i { color: #a855f7; text-shadow: 0 0 10px rgba(168, 85, 247, 0.6); }
+        .info-card.safety-card i { color: #34d399; text-shadow: 0 0 10px rgba(52, 211, 153, 0.6); }
+
+        .info-card .card-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-card .card-value {
+            font-size: clamp(0.68rem, 2.5vw, 0.76rem);
+            font-weight: 800;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 4px 6px;
+            border-radius: 10px;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .info-card.safety-card .card-value {
+            color: #34d399;
+            background: rgba(52, 211, 153, 0.12);
+            border-color: rgba(52, 211, 153, 0.3);
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #34d399;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px #34d399;
+            animation: dotPulse 1.8s infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 10px #34d399; }
+            50% { opacity: 0.4; transform: scale(0.75); box-shadow: 0 0 3px #34d399; }
+        }
+
+        /* NÚT TẢI XANH LÁ PHÁT SÁNG CYBERPUNK */
+        .download-green-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.98rem;
+            text-decoration: none;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: btnGlowPulse 2.5s infinite alternate;
+        }
+
+        @keyframes btnGlowPulse {
+            0% { box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4); }
+            100% { box-shadow: 0 12px 32px rgba(16, 185, 129, 0.75), 0 0 20px rgba(52, 211, 153, 0.6); }
+        }
+
+        .download-green-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+        }
+
+        .download-green-btn:active {
+            transform: translateY(1px) scale(0.98);
+        }
+
+        @media (max-width: 480px) {
+            .clock-wrapper { top: 14px; left: 14px; }
+            .live-clock { padding: 8px 14px; font-size: 0.75rem; border-radius: 16px; }
+            .container { max-height: 88vh; border-radius: 30px; margin: 14px; }
+            .container-inner { max-height: calc(88vh - 6px); border-radius: 28px; padding-top: 24px; }
+            .header-title { padding: 0 20px; margin-bottom: 14px; }
+            .button-scroll-area { padding: 0 18px; }
+            .button-group { padding-bottom: 20px; gap: 12px; }
+            .header-title h1 { font-size: 1.5rem; }
+            .btn { padding: 12px 16px; font-size: 0.88rem; border-radius: 16px; }
+            .btn img, .button-group img { width: 36px !important; height: 36px !important; }
+            .modal-card { padding: 20px; }
+            .modal-body-grid { gap: 6px; padding: 10px 6px; }
+            .info-card .card-label { font-size: 0.62rem; }
+            .info-card .card-value { font-size: 0.68rem; padding: 3px 4px; }
+        }
+    </style>
+</head>
+<body>
+
+    <video autoplay muted loop playsinline class="bg-video">
+        <source src="hinhanhdong.mp4" type="video/mp4">
+    </video>
+    <div class="bg-overlay"></div>
+
+    <div class="clock-wrapper">
+        <div class="live-clock">
+            <i class="fa-solid fa-clock"></i>
+            <div class="clock-info">
+                <span id="vietnam-date">Đang tải...</span>
+                <span id="vietnam-time">--:--:--</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="container-inner">
+            <div class="header-title">
+                <h1>Web tải Executor by Huy</h1>
+                <p>Web tải siêu nhanh và mượt, Update liên tục!.</p>
+                
+                <div class="note-badge">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Ghi chú: Nhấn vào từng bản để xem chi tiết & tải nhé!</span>
+                </div>
+            </div>
+            
+            <div class="button-scroll-area">
+                <div class="button-group">
+                    <!-- NÚT 1: MADIUM -->
+                    <a href="javascript:void(0)" class="btn btn-other" 
+                       data-name="Madium" 
+                       data-icon="https://cdn.beacons.ai/user_content/o3PPAE7K1hUJHQwKTK2TF8MQo7I2/referenced_images/generated-images__link-in-bio__links-block__home__d32171f3-529e-440b-92c6-71d158a45235__d13589fa-9ba6-4e46-bd89-c39e16e688ba__2ef6439a-fa0b-4640-b454-32e8de1fe308.webp?t=1783163747685" 
+                       data-unc="98%" 
+                       data-sunc="100%" 
+                       data-safety="UNDETECTED" 
+                       data-link="https://www.mediafire.com/file/q924jycyf8k80he/Madium_safe_by_Q_Huy.zip/file">
+                        <div class="btn-content-left">
+                            <img src="https://cdn.beacons.ai/user_content/o3PPAE7K1hUJHQwKTK2TF8MQo7I2/referenced_images/generated-images__link-in-bio__links-block__home__d32171f3-529e-440b-92c6-71d158a45235__d13589fa-9ba6-4e46-bd89-c39e16e688ba__2ef6439a-fa0b-4640-b454-32e8de1fe308.webp?t=1783163747685" alt="Icon">
+                            <span>Madium</span>
+                        </div>
+                        <i class="fa-solid fa-arrow-right arrow-right"></i>
+                    </a>
+
+                    <!-- NÚT 2: VELOCITY -->
+                    <a href="javascript:void(0)" class="btn btn-other" 
+                       data-name="Velocity" 
+                       data-icon="https://cdn.beacons.ai/user_content/o3PPAE7K1hUJHQwKTK2TF8MQo7I2/referenced_images/generated-images__link-in-bio__links-block__home__0cf3b393-cff0-48d6-806c-87403b48af20__5cca49cf-6f3a-4ebb-887d-bc06bf969e87__63eb95dc-ec1b-4b7a-a44e-8a2196029559.webp?t=1783582661267" 
+                       data-unc="99%" 
+                       data-sunc="94%" 
+                       data-safety="UNDETECTED" 
+                       data-link="https://www.mediafire.com/file/6ihsmca0ficv047/Velocity_safe_by_Q_Huy.rar/file">
+                        <div class="btn-content-left">
+                            <img src="https://cdn.beacons.ai/user_content/o3PPAE7K1hUJHQwKTK2TF8MQo7I2/referenced_images/generated-images__link-in-bio__links-block__home__0cf3b393-cff0-48d6-806c-87403b48af20__5cca49cf-6f3a-4ebb-887d-bc06bf969e87__63eb95dc-ec1b-4b7a-a44e-8a2196029559.webp?t=1783582661267" alt="Icon">
+                            <span>Velocity</span>
+                        </div>
+                        <i class="fa-solid fa-arrow-right arrow-right"></i>
+                    </a>
+
+                    <!-- NÚT 3: REAL -->
+                    <a href="javascript:void(0)" class="btn btn-other" 
+                       data-name="Real (Phải vượt link mới tải được)" 
+                       data-icon="https://yt3.googleusercontent.com/_HbK3kduQIKLRkJeF4YPcMqAypJWJlkKT7NsUjPlL1x0UcYSJNhekJIs73xi4thhThw38gmc=s120-c-k-c0x00ffffff-no-rj" 
+                       data-unc="99%" 
+                       data-sunc="100%" 
+                       data-safety="UNDETECTED" 
+                       data-link="https://projectreal.gg/vi/download/">
+                        <div class="btn-content-left">
+                            <img src="https://yt3.googleusercontent.com/_HbK3kduQIKLRkJeF4YPcMqAypJWJlkKT7NsUjPlL1x0UcYSJNhekJIs73xi4thhThw38gmc=s120-c-k-c0x00ffffff-no-rj" alt="Icon">
+                            <span>Real (Phải vượt link mới tải được)</span>
+                        </div>
+                        <i class="fa-solid fa-arrow-right arrow-right"></i>
+                    </a>
+
+                    <!-- NÚT 4: XENO -->
+                    <a href="javascript:void(0)" class="btn btn-other" 
+                       data-name="Xeno" 
+                       data-icon="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFcbsPXEgWRy8HTTEcOFGUY0gIZRZWLO2UPJzrFL_WsQ&s=10" 
+                       data-unc="< 84%" 
+                       data-sunc="40%" 
+                       data-safety="UNDETECTED" 
+                       data-link="https://www.mediafire.com/file/nun4y0lnbuqgxdf/Xeno_Safe_By_Q_Huy.rar/file">
+                        <div class="btn-content-left">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFcbsPXEgWRy8HTTEcOFGUY0gIZRZWLO2UPJzrFL_WsQ&s=10" alt="Icon">
+                            <span>Xeno</span>
+                        </div>
+                        <i class="fa-solid fa-arrow-right arrow-right"></i>
+                    </a>
+
+                    <!-- NÚT 5: SOLARA -->
+                    <a href="javascript:void(0)" class="btn btn-other" 
+                       data-name="Solara" 
+                       data-icon="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyxCFdvPxMIpn6vYy1u0vIX8gOEdg1LSCryodcfu5wTHXPICgMKxVCmFo&s=10" 
+                       data-unc="67%" 
+                       data-sunc="46%" 
+                       data-safety="UNDETECTED" 
+                       data-link="https://www.mediafire.com/file/pekaqyzm8x3zpgh/Solara_Safe_By_Q_Huy.rar/file">
+                        <div class="btn-content-left">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyxCFdvPxMIpn6vYy1u0vIX8gOEdg1LSCryodcfu5wTHXPICgMKxVCmFo&s=10" alt="Icon">
+                            <span>Solara</span>
+                        </div>
+                        <i class="fa-solid fa-arrow-right arrow-right"></i>
+                    </a>
+
+                    <!-- NÚT 6: VORTEX -->
+                    <a href="javascript:void(0)" class="btn btn-other" 
+                       data-name="Vortex" 
+                       data-icon="https://tngexecutor.vercel.app/assets/logo.png" 
+                       data-unc="99%" 
+                       data-sunc="100%" 
+                       data-safety="UNDETECTED" 
+                       data-link="https://www.mediafire.com/file/ya7i6oin7l28zq4/Vortedx_safe_by_Q_Huy.zip/file">
+                        <div class="btn-content-left">
+                            <img src="https://tngexecutor.vercel.app/assets/logo.png" alt="Icon">
+                            <span>Vortex</span>
+                        </div>
+                        <i class="fa-solid fa-arrow-right arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BẢNG THÔNG BÁO POPUP -->
+    <div id="info-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div class="modal-header">
+                <img id="modal-icon" src="" alt="Icon">
+                <div class="modal-header-text">
+                    <span class="subtitle">Thông tin chi tiết</span>
+                    <h2 id="modal-title">Name</h2>
+                </div>
+            </div>
+
+            <!-- BỐ CỤC 3 Ô CHỈ SỐ -->
+            <div class="modal-body-grid">
+                <div class="info-card unc-card">
+                    <i class="fa-solid fa-microchip"></i>
+                    <span class="card-label">UNC</span>
+                    <span class="card-value" id="modal-unc">N/A</span>
+                </div>
+
+                <div class="info-card sunc-card">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span class="card-label">SUNC</span>
+                    <span class="card-value" id="modal-sunc">N/A</span>
+                </div>
+
+                <div class="info-card safety-card">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span class="card-label">An toàn</span>
+                    <span class="card-value" id="modal-safety">
+                        <span class="status-dot"></span><span id="safety-text">UNDETECTED</span>
+                    </span>
+                </div>
+            </div>
+
+            <a id="modal-download-btn" href="#" target="_blank" class="download-green-btn">
+                <i class="fa-solid fa-download"></i> Click to download
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // ----- HỆ THỐNG BẢO VỆ TỐI ĐA -----
+        
+        // 1. Chống Click chuột phải, chọn văn bản, kéo thả ảnh
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('selectstart', e => e.preventDefault());
+        document.addEventListener('dragstart', e => e.preventDefault());
+
+        // 2. Chống tổ hợp phím F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S, v.v.
+        document.addEventListener('keydown', e => {
+            if (
+                e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) || 
+                (e.ctrlKey && ['U', 'u', 'S', 's', 'A', 'a', 'C', 'c'].includes(e.key))
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // 3. Chống Debugger & Phá vỡ khi bật DevTools
+        setInterval(() => {
+            const before = performance.now();
+            debugger;
+            const after = performance.now();
+            if (after - before > 100) {
+                document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#030712;color:#ff4d4d;font-size:24px;font-weight:bold;text-align:center;font-family:sans-serif;">Bảo mật kích hoạt: Không được phép sử dụng công cụ gỡ lỗi!</div>';
+            }
+        }, 1000);
+
+        // 4. Phát hiện DevTools qua kích thước cửa sổ
+        const threshold = 160;
+        window.addEventListener('resize', () => {
+            if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
+                document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#030712;color:#ff4d4d;font-size:24px;font-weight:bold;text-align:center;font-family:sans-serif;">Cảnh báo: Phát hiện Developer Tools đang mở!</div>';
+            }
+        });
+
+        // 5. Chống nhúng trang web vào iframe (Frame-busting)
+        if (window.self !== window.top) {
+            window.top.location.href = window.self.location.href;
+        }
+
+        // ----- CÁC TÍNH NĂNG GIAO DIỆN -----
+
+        // Tạo các hạt ánh sáng lung linh (Particles)
+        function createParticles() {
+            const particleCount = 25;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const size = Math.random() * 4 + 2 + 'px';
+                particle.style.width = size;
+                particle.style.height = size;
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDuration = Math.random() * 6 + 4 + 's';
+                particle.style.animationDelay = Math.random() * 4 + 's';
+                document.body.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Đồng hồ thời gian Việt Nam
+        function updateClock() {
+            const now = new Date();
+            const dateOptions = { timeZone: 'Asia/Ho_Chi_Minh', weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
+            const timeOptions = { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            
+            document.getElementById('vietnam-date').textContent = new Intl.DateTimeFormat('vi-VN', dateOptions).format(now);
+            document.getElementById('vietnam-time').textContent = new Intl.DateTimeFormat('vi-VN', timeOptions).format(now);
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // XỬ LÝ MỞ POPUP BẢNG XEM THÊM
+        const modal = document.getElementById('info-modal');
+        const closeBtn = document.getElementById('modal-close-btn');
+
+        document.querySelectorAll('.btn-other').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const name = this.getAttribute('data-name');
+                const icon = this.getAttribute('data-icon');
+                const unc = this.getAttribute('data-unc') || 'N/A';
+                const sunc = this.getAttribute('data-sunc') || 'N/A';
+                const safety = this.getAttribute('data-safety') || 'UNDETECTED';
+                const link = this.getAttribute('data-link');
+
+                document.getElementById('modal-title').textContent = name;
+                document.getElementById('modal-icon').src = icon;
+                document.getElementById('modal-unc').textContent = unc;
+                document.getElementById('modal-sunc').textContent = sunc;
+                document.getElementById('safety-text').textContent = safety;
+                document.getElementById('modal-download-btn').href = link;
+
+                modal.classList.add('active');
+            });
+        });
+
+        // Đóng popup
+        closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
