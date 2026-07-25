@@ -63,7 +63,7 @@
             pointer-events: none;
         }
 
-        /* HIỆU ỨNG HẠT ÁNH SÁNG BAY LƠ LỬNG (MAGIC PARTICLES) */
+        /* HIỆU ỨNG HẠT ÁNH SÁNG BAY LƠ LỬNG */
         .particle {
             position: fixed;
             background: rgba(255, 255, 255, 0.9);
@@ -81,7 +81,7 @@
             100% { transform: translateY(-10vh) translateX(25px) scale(0.2); opacity: 0; }
         }
 
-        /* ĐỒNG HỒ SANG TRỌNG CÓ HIỆU ỨNG NEON GLOW */
+        /* ĐỒNG HỒ SANG TRỌNG */
         .clock-wrapper {
             position: fixed;
             top: 24px;
@@ -120,17 +120,8 @@
             text-shadow: 0 0 10px rgba(129, 140, 248, 0.8);
         }
 
-        .live-clock:hover i {
-            transform: rotate(360deg) scale(1.2);
-            color: #c7d2fe;
-        }
-
-        .clock-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1px;
-        }
-
+        .live-clock:hover i { transform: rotate(360deg) scale(1.2); color: #c7d2fe; }
+        .clock-info { display: flex; flex-direction: column; gap: 1px; }
         #vietnam-date { font-size: 0.7rem; color: rgba(255, 255, 255, 0.7); font-weight: 500; }
         #vietnam-time { font-size: 0.95rem; font-weight: 700; letter-spacing: 0.5px; text-shadow: 0 0 8px rgba(255,255,255,0.4); }
 
@@ -139,39 +130,34 @@
             50% { transform: translateY(-5px); }
         }
 
-        /* CONTAINER CHÍNH VỚI VIỀN XOAY CONIC GRADIENT CỰC COOL */
+        /* CONTAINER CHÍNH */
         .container {
             position: relative;
             z-index: 10;
             width: 100%;
-            max-width: 450px;
+            max-width: 480px;
             max-height: 88vh;
             margin: 20px;
             background: rgba(10, 15, 30, 0.82);
             border-radius: 34px;
-            padding: 3px; /* Dành chỗ cho viền xoay */
+            padding: 3px;
             animation: containerEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), 0 0 50px rgba(99, 102, 241, 0.25);
             overflow: hidden;
         }
 
-        /* Viền sáng xoay tự động quanh khung */
         .container::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
             background: conic-gradient(from 0deg at 50% 50%, #6366f1 0deg, #10b981 120deg, #38bdf8 240deg, #6366f1 360deg);
             animation: rotateBorder 6s linear infinite;
             z-index: 1;
             pointer-events: none;
         }
 
-        @keyframes rotateBorder {
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes rotateBorder { 100% { transform: rotate(360deg); } }
 
         .container-inner {
             position: relative;
@@ -191,14 +177,8 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* TIÊU ĐỀ ANIMATION GRADIENT VÀ NEON SHADOW */
-        .header-title {
-            padding: 0 28px;
-            margin-bottom: 16px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
+        .header-title { padding: 0 28px; margin-bottom: 16px; text-align: center; flex-shrink: 0; }
+        
         .header-title h1 {
             font-size: 1.7rem;
             font-weight: 800;
@@ -210,18 +190,10 @@
             animation: shineTitle 4s linear infinite;
             text-shadow: 0 0 30px rgba(129, 140, 248, 0.5);
         }
+        @keyframes shineTitle { to { background-position: 200% center; } }
+        
+        .header-title p { font-size: 0.83rem; color: rgba(255, 255, 255, 0.7); font-weight: 400; }
 
-        @keyframes shineTitle {
-            to { background-position: 200% center; }
-        }
-
-        .header-title p {
-            font-size: 0.83rem;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 400;
-        }
-
-        /* HUY HIỆU GHI CHÚ GLOWING */
         .note-badge {
             margin: 12px auto 0 auto;
             display: inline-flex;
@@ -237,26 +209,18 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(129, 140, 248, 0.1);
             transition: all 0.3s ease;
         }
-
         .note-badge:hover {
             background: rgba(129, 140, 248, 0.25);
             border-color: rgba(129, 140, 248, 0.7);
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(129, 140, 248, 0.4);
         }
-
-        .note-badge i {
-            color: #38bdf8;
-            font-size: 0.8rem;
-            animation: pulseIcon 2s infinite;
-        }
-
+        .note-badge i { color: #38bdf8; font-size: 0.8rem; animation: pulseIcon 2s infinite; }
         @keyframes pulseIcon {
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.25); opacity: 0.7; }
         }
 
-        /* KHUNG CUỘN NỘI DUNG */
         .button-scroll-area {
             flex-grow: 1;
             overflow-y: auto;
@@ -264,7 +228,6 @@
             padding: 0 24px;
             scrollbar-width: none;
         }
-
         .button-scroll-area::-webkit-scrollbar { display: none; }
 
         .button-group {
@@ -274,23 +237,7 @@
             padding-bottom: 24px;
         }
 
-        /* KÍCH THƯỚC ICON ẢNH AN TOÀN */
-        .btn img, .button-group img {
-            width: 40px !important;
-            height: 40px !important;
-            border-radius: 50% !important;
-            object-fit: cover !important;
-            object-position: center !important;
-            border: 2px solid rgba(255, 255, 255, 0.3) !important;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6) !important;
-            background: rgba(0, 0, 0, 0.6) !important;
-            padding: 1px !important;
-            flex-shrink: 0 !important;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-            pointer-events: none;
-        }
-
-        /* NÚT BẤM HIỆU ỨNG CYBERPUNK GLOW HOVER */
+        /* ===== DANH SÁCH NÚT & TRẠNG THÁI BÊN NGOÀI ===== */
         .btn {
             width: 100%;
             display: flex;
@@ -299,9 +246,6 @@
             padding: 14px 18px;
             border-radius: 20px;
             text-decoration: none;
-            color: #ffffff;
-            font-weight: 600;
-            font-size: 0.93rem;
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             border: 1px solid rgba(255, 255, 255, 0.1);
             background: rgba(255, 255, 255, 0.04);
@@ -313,23 +257,16 @@
             cursor: pointer;
         }
 
-        /* Hiệu ứng tia sáng lướt qua nút */
         .btn::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 70%;
-            height: 100%;
+            top: 0; left: -100%;
+            width: 70%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
             transform: skewX(-25deg);
         }
 
-        .btn:hover::before {
-            left: 140%;
-            transition: all 0.75s ease-in-out;
-        }
-
+        .btn:hover::before { left: 140%; transition: all 0.75s ease-in-out; }
         .btn:nth-child(1) { animation-delay: 0.08s; }
         .btn:nth-child(2) { animation-delay: 0.16s; }
         .btn:nth-child(3) { animation-delay: 0.24s; }
@@ -337,10 +274,7 @@
         .btn:nth-child(5) { animation-delay: 0.40s; }
         .btn:nth-child(6) { animation-delay: 0.48s; }
 
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(25px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes slideInUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
 
         .btn-other:hover {
             background: rgba(99, 102, 241, 0.15);
@@ -349,23 +283,77 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(99, 102, 241, 0.4);
         }
 
-        .btn-other:hover img {
-            transform: scale(1.15) rotate(8deg) !important;
-            border-color: rgba(255, 255, 255, 0.95) !important;
-            box-shadow: 0 0 20px rgba(129, 140, 248, 0.8) !important;
-        }
-
-        .btn:active {
-            transform: translateY(1px) scale(0.98) !important;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
-        }
+        .btn:active { transform: translateY(1px) scale(0.98) !important; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important; }
 
         .btn-content-left {
             display: flex;
             align-items: center;
             gap: 14px;
             z-index: 2;
+            width: 90%;
         }
+
+        .btn img {
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            object-fit: cover !important;
+            border: 2px solid rgba(255, 255, 255, 0.3) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6) !important;
+            background: rgba(0, 0, 0, 0.6) !important;
+            padding: 1px !important;
+            flex-shrink: 0 !important;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+            pointer-events: none;
+        }
+
+        .btn-other:hover img {
+            transform: scale(1.15) rotate(8deg) !important;
+            border-color: rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 0 0 20px rgba(129, 140, 248, 0.8) !important;
+        }
+
+        .btn-text-group {
+            display: flex;
+            align-items: center; /* Đặt Tên & Badge nằm ngang */
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .btn-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #ffffff;
+            white-space: nowrap;
+        }
+
+        /* BADGE TRẠNG THÁI NGAY TRÊN NÚT */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.6rem;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid transparent;
+        }
+        
+        .status-badge .dot { width: 5px; height: 5px; border-radius: 50%; display: inline-block; }
+
+        /* MÀU BADGE */
+        .badge-working { color: #34d399; background: rgba(52, 211, 153, 0.15); border-color: rgba(52, 211, 153, 0.3); }
+        .badge-working .dot { background: #34d399; box-shadow: 0 0 6px #34d399; animation: pulseDot 1.5s infinite; }
+
+        .badge-unstable { color: #fb923c; background: rgba(251, 146, 60, 0.15); border-color: rgba(251, 146, 60, 0.3); }
+        .badge-unstable .dot { background: #fb923c; box-shadow: 0 0 6px #fb923c; animation: pulseDot 1.5s infinite; }
+
+        .badge-patched, .badge-outdated { color: #ef4444; background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.3); }
+        .badge-patched .dot, .badge-outdated .dot { background: #ef4444; box-shadow: 0 0 6px #ef4444; animation: pulseDot 1.5s infinite; }
+
+        @keyframes pulseDot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.6); opacity: 0.5; } }
 
         .btn i.arrow-right {
             transition: all 0.3s ease;
@@ -373,72 +361,60 @@
             font-size: 0.95rem;
             z-index: 2;
         }
+        .btn:hover i.arrow-right { color: #38bdf8; transform: translateX(6px) scale(1.2); text-shadow: 0 0 10px rgba(56, 189, 248, 0.8); }
 
-        .btn:hover i.arrow-right {
-            color: #38bdf8;
-            transform: translateX(6px) scale(1.2);
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
-        }
 
         /* ===== MODAL POPUP ULTRA CHILL & COOL ===== */
         .modal-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
             background: rgba(3, 7, 18, 0.85);
-            backdrop-filter: blur(18px);
+            backdrop-filter: blur(20px); 
             z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0;
             pointer-events: none;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
 
         .modal-card {
-            background: rgba(13, 19, 36, 0.96);
-            border: 1px solid rgba(129, 140, 248, 0.35);
-            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.95), 0 0 60px rgba(99, 102, 241, 0.35);
+            background: linear-gradient(145deg, rgba(17, 24, 39, 0.95) 0%, rgba(11, 15, 25, 0.98) 100%);
+            border: 1px solid rgba(129, 140, 248, 0.25);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.95), 0 0 60px rgba(99, 102, 241, 0.2);
             border-radius: 34px;
             padding: 28px;
             width: 92%;
             max-width: 420px;
             position: relative;
-            transform: scale(0.8) translateY(30px);
-            transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: scale(0.7) translateY(40px) rotateX(10deg);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
-        .modal-overlay.active .modal-card {
-            transform: scale(1) translateY(0);
-        }
+        .modal-overlay.active .modal-card { transform: scale(1) translateY(0) rotateX(0); opacity: 1; }
 
         .modal-close {
             position: absolute;
-            top: 18px;
-            right: 20px;
+            top: 18px; right: 20px;
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.15);
             color: rgba(255, 255, 255, 0.7);
             font-size: 1.1rem;
-            width: 36px;
-            height: 36px;
+            width: 36px; height: 36px;
             border-radius: 50%;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: center; justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            z-index: 10;
         }
 
         .modal-close:hover {
@@ -446,50 +422,21 @@
             color: #ffffff;
             border-color: transparent;
             transform: rotate(90deg) scale(1.15);
-            box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
         }
 
-        .modal-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding-right: 32px;
-        }
-
+        .modal-header { display: flex; align-items: center; gap: 16px; padding-right: 32px; }
         .modal-header img {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            object-fit: cover;
+            width: 56px; height: 56px;
+            border-radius: 50%; object-fit: cover;
             border: 2px solid rgba(129, 140, 248, 0.8);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 20px rgba(99, 102, 241, 0.5);
             pointer-events: none;
         }
+        .modal-header-text { display: flex; flex-direction: column; gap: 3px; }
+        .modal-header h2 { color: #ffffff; font-size: 1.45rem; font-weight: 800; letter-spacing: 0.3px; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
+        .modal-header span.subtitle { font-size: 0.72rem; color: #818cf8; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; text-shadow: 0 0 8px rgba(129, 140, 248, 0.6); }
 
-        .modal-header-text {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-        }
-
-        .modal-header h2 {
-            color: #ffffff;
-            font-size: 1.35rem;
-            font-weight: 800;
-            letter-spacing: 0.3px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-
-        .modal-header span.subtitle {
-            font-size: 0.72rem;
-            color: #818cf8;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            text-shadow: 0 0 8px rgba(129, 140, 248, 0.6);
-        }
-
-        /* BỐ CỤC 3 Ô CHỈ SỐ NẰM NGANG */
         .modal-body-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -498,122 +445,80 @@
             padding: 14px 10px;
             border-radius: 22px;
             border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
         }
 
         .info-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
             background: rgba(15, 23, 42, 0.85);
-            padding: 12px 6px;
-            border-radius: 18px;
+            padding: 12px 6px; border-radius: 18px;
             border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-            text-align: center;
-            min-width: 0;
+            text-align: center; min-width: 0; position: relative; overflow: hidden;
         }
+
+        .info-card::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: skewX(-20deg); transition: 0.5s;
+        }
+        .info-card:hover::after { left: 150%; }
 
         .info-card:hover {
             border-color: rgba(129, 140, 248, 0.6);
-            transform: translateY(-3px);
+            transform: translateY(-4px) scale(1.02);
             background: rgba(30, 41, 59, 0.95);
-            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4), 0 0 15px rgba(129, 140, 248, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(129, 140, 248, 0.2);
         }
 
-        .info-card i {
-            font-size: 0.95rem;
-            margin-bottom: 6px;
-        }
-
+        .info-card i { font-size: 1.05rem; margin-bottom: 8px; transition: all 0.3s ease; }
         .info-card.unc-card i { color: #38bdf8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.6); }
         .info-card.sunc-card i { color: #a855f7; text-shadow: 0 0 10px rgba(168, 85, 247, 0.6); }
-        .info-card.safety-card i { color: #34d399; text-shadow: 0 0 10px rgba(52, 211, 153, 0.6); }
+        
+        /* BOX AN TOÀN TRỞ LẠI */
+        .info-card.safe-card i { color: #10b981; text-shadow: 0 0 10px rgba(16, 185, 129, 0.6); }
+        .info-card.safe-card:hover { border-color: rgba(16, 185, 129, 0.5); box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 20px rgba(16, 185, 129, 0.2); }
 
-        .info-card .card-label {
-            font-size: 0.68rem;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
+        .info-card .card-label { font-size: 0.68rem; font-weight: 700; color: rgba(255, 255, 255, 0.6); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
         .info-card .card-value {
-            font-size: clamp(0.68rem, 2.5vw, 0.76rem);
-            font-weight: 800;
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.06);
-            padding: 4px 6px;
-            border-radius: 10px;
-            width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
+            font-size: clamp(0.65rem, 2.3vw, 0.74rem); font-weight: 800; color: #ffffff;
+            background: rgba(255, 255, 255, 0.06); padding: 5px 6px; border-radius: 10px; width: 100%;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex; align-items: center; justify-content: center; gap: 5px; transition: all 0.3s ease;
         }
 
-        .info-card.safety-card .card-value {
-            color: #34d399;
-            background: rgba(52, 211, 153, 0.12);
-            border-color: rgba(52, 211, 153, 0.3);
-        }
+        /* MÀU CHO CHỮ UNDETECTED BÊN TRONG BẢNG AN TOÀN */
+        .safe-value-style { color: #10b981 !important; background: rgba(16, 185, 129, 0.12) !important; border-color: rgba(16, 185, 129, 0.3) !important; }
+        .safe-dot { width: 6px; height: 6px; border-radius: 50%; background-color: #10b981; box-shadow: 0 0 10px #10b981; animation: dotPulseSafe 1.5s infinite; }
+        @keyframes dotPulseSafe { 0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 10px #10b981; } 50% { opacity: 0.4; transform: scale(0.75); box-shadow: 0 0 3px #10b981; } }
 
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            background-color: #34d399;
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 10px #34d399;
-            animation: dotPulse 1.8s infinite;
-            flex-shrink: 0;
-        }
-
-        @keyframes dotPulse {
-            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 10px #34d399; }
-            50% { opacity: 0.4; transform: scale(0.75); box-shadow: 0 0 3px #34d399; }
-        }
-
-        /* NÚT TẢI XANH LÁ PHÁT SÁNG CYBERPUNK */
+        /* NÚT TẢI XUỐNG GLOW MƯỢT MÀ */
         .download-green-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            padding: 15px;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            width: 100%; padding: 16px;
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: #ffffff;
-            font-weight: 800;
-            font-size: 0.98rem;
-            text-decoration: none;
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
+            color: #ffffff; font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; text-decoration: none;
+            border-radius: 20px; box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
             transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-            overflow: hidden;
+            position: relative; overflow: hidden;
             animation: btnGlowPulse 2.5s infinite alternate;
         }
 
+        .download-green-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-20deg); transition: 0.6s ease;
+        }
+        .download-green-btn:hover::before { left: 150%; }
+
         @keyframes btnGlowPulse {
             0% { box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4); }
-            100% { box-shadow: 0 12px 32px rgba(16, 185, 129, 0.75), 0 0 20px rgba(52, 211, 153, 0.6); }
+            100% { box-shadow: 0 12px 35px rgba(16, 185, 129, 0.8), 0 0 20px rgba(52, 211, 153, 0.6); }
         }
 
-        .download-green-btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
-        }
-
-        .download-green-btn:active {
-            transform: translateY(1px) scale(0.98);
-        }
+        .download-green-btn:hover { transform: translateY(-4px) scale(1.02); background: linear-gradient(135deg, #34d399 0%, #10b981 100%); }
+        .download-green-btn:active { transform: translateY(1px) scale(0.98); }
 
         @media (max-width: 480px) {
             .clock-wrapper { top: 14px; left: 14px; }
@@ -624,12 +529,15 @@
             .button-scroll-area { padding: 0 18px; }
             .button-group { padding-bottom: 20px; gap: 12px; }
             .header-title h1 { font-size: 1.5rem; }
-            .btn { padding: 12px 16px; font-size: 0.88rem; border-radius: 16px; }
-            .btn img, .button-group img { width: 36px !important; height: 36px !important; }
-            .modal-card { padding: 20px; }
+            .btn { padding: 12px 14px; border-radius: 16px; }
+            .btn img { width: 38px !important; height: 38px !important; }
+            .btn-name { font-size: 0.88rem; }
+            .status-badge { font-size: 0.55rem; padding: 3px 6px; }
+            .modal-card { padding: 22px; }
             .modal-body-grid { gap: 6px; padding: 10px 6px; }
             .info-card .card-label { font-size: 0.62rem; }
-            .info-card .card-value { font-size: 0.68rem; padding: 3px 4px; }
+            .info-card .card-value { font-size: 0.65rem; padding: 4px; gap: 3px; }
+            .download-green-btn { padding: 14px; font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -654,7 +562,7 @@
         <div class="container-inner">
             <div class="header-title">
                 <h1>Web tải Executor by Huy</h1>
-                <p>Web tải siêu nhanh và mượt, Update liên tục!.</p>
+                <p>Web tải siêu nhanh và mượt, Update liên tục!</p>
                 
                 <div class="note-badge">
                     <i class="fa-solid fa-circle-info"></i>
@@ -664,92 +572,117 @@
             
             <div class="button-scroll-area">
                 <div class="button-group">
-                    <!-- NÚT 1: MADIUM -->
+                    
+                    <!-- NÚT 1: MADIUM (WORKING) -->
                     <a href="javascript:void(0)" class="btn btn-other" 
                        data-name="Madium" 
                        data-icon="https://cdn.beacons.ai/user_content/o3PPAE7K1hUJHQwKTK2TF8MQo7I2/referenced_images/generated-images__link-in-bio__links-block__home__d32171f3-529e-440b-92c6-71d158a45235__d13589fa-9ba6-4e46-bd89-c39e16e688ba__2ef6439a-fa0b-4640-b454-32e8de1fe308.webp?t=1783163747685" 
                        data-unc="98%" 
                        data-sunc="100%" 
-                       data-safety="UNDETECTED" 
+                       data-safety="UNDETECTED"
                        data-link="https://www.mediafire.com/file/q924jycyf8k80he/Madium_safe_by_Q_Huy.zip/file">
                         <div class="btn-content-left">
                             <img src="https://cdn.beacons.ai/user_content/o3PPAE7K1hUJHQwKTK2TF8MQo7I2/referenced_images/generated-images__link-in-bio__links-block__home__d32171f3-529e-440b-92c6-71d158a45235__d13589fa-9ba6-4e46-bd89-c39e16e688ba__2ef6439a-fa0b-4640-b454-32e8de1fe308.webp?t=1783163747685" alt="Icon">
-                            <span>Madium</span>
+                            <div class="btn-text-group">
+                                <span class="btn-name">Madium</span>
+                                <!-- Chỉnh sửa trạng thái ở dòng bên dưới -->
+                                <span class="status-badge badge-working"><span class="dot"></span>WORKING</span>
+                            </div>
                         </div>
                         <i class="fa-solid fa-arrow-right arrow-right"></i>
                     </a>
 
-                    <!-- NÚT 2: VELOCITY -->
+                    <!-- NÚT 2: VELOCITY (UNSTABLE) -->
                     <a href="javascript:void(0)" class="btn btn-other" 
                        data-name="Velocity" 
                        data-icon="https://cdn.beacons.ai/user_content/o3PPAE7K1hUJHQwKTK2TF8MQo7I2/referenced_images/generated-images__link-in-bio__links-block__home__0cf3b393-cff0-48d6-806c-87403b48af20__5cca49cf-6f3a-4ebb-887d-bc06bf969e87__63eb95dc-ec1b-4b7a-a44e-8a2196029559.webp?t=1783582661267" 
                        data-unc="99%" 
                        data-sunc="94%" 
-                       data-safety="UNDETECTED" 
+                       data-safety="UNDETECTED"
                        data-link="https://www.mediafire.com/file/6ihsmca0ficv047/Velocity_safe_by_Q_Huy.rar/file">
                         <div class="btn-content-left">
                             <img src="https://cdn.beacons.ai/user_content/o3PPAE7K1hUJHQwKTK2TF8MQo7I2/referenced_images/generated-images__link-in-bio__links-block__home__0cf3b393-cff0-48d6-806c-87403b48af20__5cca49cf-6f3a-4ebb-887d-bc06bf969e87__63eb95dc-ec1b-4b7a-a44e-8a2196029559.webp?t=1783582661267" alt="Icon">
-                            <span>Velocity</span>
+                            <div class="btn-text-group">
+                                <span class="btn-name">Velocity</span>
+                                <!-- Chỉnh sửa trạng thái ở dòng bên dưới -->
+                                <span class="status-badge badge-unstable"><span class="dot"></span>UNSTABLE</span>
+                            </div>
                         </div>
                         <i class="fa-solid fa-arrow-right arrow-right"></i>
                     </a>
 
-                    <!-- NÚT 3: REAL -->
+                    <!-- NÚT 3: REAL (WORKING) -->
                     <a href="javascript:void(0)" class="btn btn-other" 
                        data-name="Real (Phải vượt link mới tải được)" 
                        data-icon="https://yt3.googleusercontent.com/_HbK3kduQIKLRkJeF4YPcMqAypJWJlkKT7NsUjPlL1x0UcYSJNhekJIs73xi4thhThw38gmc=s120-c-k-c0x00ffffff-no-rj" 
                        data-unc="99%" 
                        data-sunc="100%" 
-                       data-safety="UNDETECTED" 
+                       data-safety="UNDETECTED"
                        data-link="https://projectreal.gg/vi/download/">
                         <div class="btn-content-left">
                             <img src="https://yt3.googleusercontent.com/_HbK3kduQIKLRkJeF4YPcMqAypJWJlkKT7NsUjPlL1x0UcYSJNhekJIs73xi4thhThw38gmc=s120-c-k-c0x00ffffff-no-rj" alt="Icon">
-                            <span>Real (Phải vượt link mới tải được)</span>
+                            <div class="btn-text-group">
+                                <span class="btn-name">Real (Phải vượt link...)</span>
+                                <!-- Chỉnh sửa trạng thái ở dòng bên dưới -->
+                                <span class="status-badge badge-working"><span class="dot"></span>WORKING</span>
+                            </div>
                         </div>
                         <i class="fa-solid fa-arrow-right arrow-right"></i>
                     </a>
 
-                    <!-- NÚT 4: XENO -->
+                    <!-- NÚT 4: XENO (PATCHED) -->
                     <a href="javascript:void(0)" class="btn btn-other" 
                        data-name="Xeno" 
                        data-icon="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFcbsPXEgWRy8HTTEcOFGUY0gIZRZWLO2UPJzrFL_WsQ&s=10" 
                        data-unc="< 84%" 
                        data-sunc="40%" 
-                       data-safety="UNDETECTED" 
+                       data-safety="UNDETECTED"
                        data-link="https://www.mediafire.com/file/nun4y0lnbuqgxdf/Xeno_Safe_By_Q_Huy.rar/file">
                         <div class="btn-content-left">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFcbsPXEgWRy8HTTEcOFGUY0gIZRZWLO2UPJzrFL_WsQ&s=10" alt="Icon">
-                            <span>Xeno</span>
+                            <div class="btn-text-group">
+                                <span class="btn-name">Xeno</span>
+                                <!-- Chỉnh sửa trạng thái ở dòng bên dưới -->
+                                <span class="status-badge badge-patched"><span class="dot"></span>PATCHED</span>
+                            </div>
                         </div>
                         <i class="fa-solid fa-arrow-right arrow-right"></i>
                     </a>
 
-                    <!-- NÚT 5: SOLARA -->
+                    <!-- NÚT 5: SOLARA (OUTDATED) -->
                     <a href="javascript:void(0)" class="btn btn-other" 
                        data-name="Solara" 
                        data-icon="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyxCFdvPxMIpn6vYy1u0vIX8gOEdg1LSCryodcfu5wTHXPICgMKxVCmFo&s=10" 
                        data-unc="67%" 
                        data-sunc="46%" 
-                       data-safety="UNDETECTED" 
+                       data-safety="UNDETECTED"
                        data-link="https://www.mediafire.com/file/pekaqyzm8x3zpgh/Solara_Safe_By_Q_Huy.rar/file">
                         <div class="btn-content-left">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyxCFdvPxMIpn6vYy1u0vIX8gOEdg1LSCryodcfu5wTHXPICgMKxVCmFo&s=10" alt="Icon">
-                            <span>Solara</span>
+                            <div class="btn-text-group">
+                                <span class="btn-name">Solara</span>
+                                <!-- Chỉnh sửa trạng thái ở dòng bên dưới -->
+                                <span class="status-badge badge-outdated"><span class="dot"></span>OUTDATED</span>
+                            </div>
                         </div>
                         <i class="fa-solid fa-arrow-right arrow-right"></i>
                     </a>
 
-                    <!-- NÚT 6: VORTEX -->
+                    <!-- NÚT 6: VORTEX (WORKING) -->
                     <a href="javascript:void(0)" class="btn btn-other" 
                        data-name="Vortex" 
                        data-icon="https://tngexecutor.vercel.app/assets/logo.png" 
                        data-unc="99%" 
                        data-sunc="100%" 
-                       data-safety="UNDETECTED" 
+                       data-safety="UNDETECTED"
                        data-link="https://www.mediafire.com/file/ya7i6oin7l28zq4/Vortedx_safe_by_Q_Huy.zip/file">
                         <div class="btn-content-left">
                             <img src="https://tngexecutor.vercel.app/assets/logo.png" alt="Icon">
-                            <span>Vortex</span>
+                            <div class="btn-text-group">
+                                <span class="btn-name">Vortex</span>
+                                <!-- Chỉnh sửa trạng thái ở dòng bên dưới -->
+                                <span class="status-badge badge-working"><span class="dot"></span>UNSTABLE</span>
+                            </div>
                         </div>
                         <i class="fa-solid fa-arrow-right arrow-right"></i>
                     </a>
@@ -771,7 +704,6 @@
                 </div>
             </div>
 
-            <!-- BỐ CỤC 3 Ô CHỈ SỐ -->
             <div class="modal-body-grid">
                 <div class="info-card unc-card">
                     <i class="fa-solid fa-microchip"></i>
@@ -785,11 +717,13 @@
                     <span class="card-value" id="modal-sunc">N/A</span>
                 </div>
 
-                <div class="info-card safety-card">
+                <!-- KHÔI PHỤC BẢNG AN TOÀN -->
+                <div class="info-card safe-card">
                     <i class="fa-solid fa-shield-halved"></i>
-                    <span class="card-label">An toàn</span>
-                    <span class="card-value" id="modal-safety">
-                        <span class="status-dot"></span><span id="safety-text">UNDETECTED</span>
+                    <span class="card-label">AN TOÀN</span>
+                    <span class="card-value safe-value-style">
+                        <span class="safe-dot"></span>
+                        <span id="safety-text">UNDETECTED</span>
                     </span>
                 </div>
             </div>
@@ -802,13 +736,10 @@
 
     <script>
         // ----- HỆ THỐNG BẢO VỆ TỐI ĐA -----
-        
-        // 1. Chống Click chuột phải, chọn văn bản, kéo thả ảnh
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.addEventListener('selectstart', e => e.preventDefault());
         document.addEventListener('dragstart', e => e.preventDefault());
 
-        // 2. Chống tổ hợp phím F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S, v.v.
         document.addEventListener('keydown', e => {
             if (
                 e.key === 'F12' || 
@@ -820,7 +751,6 @@
             }
         });
 
-        // 3. Chống Debugger & Phá vỡ khi bật DevTools
         setInterval(() => {
             const before = performance.now();
             debugger;
@@ -830,7 +760,6 @@
             }
         }, 1000);
 
-        // 4. Phát hiện DevTools qua kích thước cửa sổ
         const threshold = 160;
         window.addEventListener('resize', () => {
             if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
@@ -838,22 +767,18 @@
             }
         });
 
-        // 5. Chống nhúng trang web vào iframe (Frame-busting)
         if (window.self !== window.top) {
             window.top.location.href = window.self.location.href;
         }
 
-        // ----- CÁC TÍNH NĂNG GIAO DIỆN -----
-
-        // Tạo các hạt ánh sáng lung linh (Particles)
+        // ----- TẠO HẠT ÁNH SÁNG & ĐỒNG HỒ -----
         function createParticles() {
             const particleCount = 25;
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 const size = Math.random() * 4 + 2 + 'px';
-                particle.style.width = size;
-                particle.style.height = size;
+                particle.style.width = size; particle.style.height = size;
                 particle.style.left = Math.random() * 100 + 'vw';
                 particle.style.animationDuration = Math.random() * 6 + 4 + 's';
                 particle.style.animationDelay = Math.random() * 4 + 's';
@@ -862,25 +787,25 @@
         }
         createParticles();
 
-        // Đồng hồ thời gian Việt Nam
         function updateClock() {
             const now = new Date();
             const dateOptions = { timeZone: 'Asia/Ho_Chi_Minh', weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
             const timeOptions = { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-            
             document.getElementById('vietnam-date').textContent = new Intl.DateTimeFormat('vi-VN', dateOptions).format(now);
             document.getElementById('vietnam-time').textContent = new Intl.DateTimeFormat('vi-VN', timeOptions).format(now);
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        // XỬ LÝ MỞ POPUP BẢNG XEM THÊM
+        // ----- XỬ LÝ MỞ POPUP & ĐIỀN DATA -----
         const modal = document.getElementById('info-modal');
         const closeBtn = document.getElementById('modal-close-btn');
 
         document.querySelectorAll('.btn-other').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
+                
+                // Lấy data từ html
                 const name = this.getAttribute('data-name');
                 const icon = this.getAttribute('data-icon');
                 const unc = this.getAttribute('data-unc') || 'N/A';
@@ -888,6 +813,7 @@
                 const safety = this.getAttribute('data-safety') || 'UNDETECTED';
                 const link = this.getAttribute('data-link');
 
+                // Điền vào Popup
                 document.getElementById('modal-title').textContent = name;
                 document.getElementById('modal-icon').src = icon;
                 document.getElementById('modal-unc').textContent = unc;
@@ -895,11 +821,11 @@
                 document.getElementById('safety-text').textContent = safety;
                 document.getElementById('modal-download-btn').href = link;
 
+                // Hiện popup
                 modal.classList.add('active');
             });
         });
 
-        // Đóng popup
         closeBtn.addEventListener('click', () => modal.classList.remove('active'));
         modal.addEventListener('click', (e) => {
             if (e.target === modal) modal.classList.remove('active');
