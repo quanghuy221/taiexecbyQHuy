@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Web tải Executor by Huy - Ultimate Edition</title>
+    <title>Web tải Executor by Huy</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -237,7 +237,7 @@
             padding-bottom: 24px;
         }
 
-        /* ===== DANH SÁCH NÚT & TRẠNG THÁI BÊN NGOÀI ===== */
+        /* ===== DANH SÁCH NÚT ===== */
         .btn {
             width: 100%;
             display: flex;
@@ -315,7 +315,7 @@
 
         .btn-text-group {
             display: flex;
-            align-items: center; /* Đặt Tên & Badge nằm ngang */
+            align-items: center; 
             flex-wrap: wrap;
             gap: 8px;
         }
@@ -327,7 +327,7 @@
             white-space: nowrap;
         }
 
-        /* BADGE TRẠNG THÁI NGAY TRÊN NÚT */
+        /* BADGE TRẠNG THÁI BÊN NGOÀI ĐƯỢC JS TẠO TỰ ĐỘNG */
         .status-badge {
             display: inline-flex;
             align-items: center;
@@ -475,7 +475,7 @@
         .info-card.unc-card i { color: #38bdf8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.6); }
         .info-card.sunc-card i { color: #a855f7; text-shadow: 0 0 10px rgba(168, 85, 247, 0.6); }
         
-        /* BOX AN TOÀN TRỞ LẠI */
+        /* BẢNG AN TOÀN */
         .info-card.safe-card i { color: #10b981; text-shadow: 0 0 10px rgba(16, 185, 129, 0.6); }
         .info-card.safe-card:hover { border-color: rgba(16, 185, 129, 0.5); box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 20px rgba(16, 185, 129, 0.2); }
 
@@ -487,7 +487,6 @@
             display: flex; align-items: center; justify-content: center; gap: 5px; transition: all 0.3s ease;
         }
 
-        /* MÀU CHO CHỮ UNDETECTED BÊN TRONG BẢNG AN TOÀN */
         .safe-value-style { color: #10b981 !important; background: rgba(16, 185, 129, 0.12) !important; border-color: rgba(16, 185, 129, 0.3) !important; }
         .safe-dot { width: 6px; height: 6px; border-radius: 50%; background-color: #10b981; box-shadow: 0 0 10px #10b981; animation: dotPulseSafe 1.5s infinite; }
         @keyframes dotPulseSafe { 0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 10px #10b981; } 50% { opacity: 0.4; transform: scale(0.75); box-shadow: 0 0 3px #10b981; } }
@@ -573,9 +572,12 @@
             <div class="button-scroll-area">
                 <div class="button-group">
                     
-                    <!-- NÚT 1: MADIUM (WORKING) -->
+                    <!-- CHỈ CẦN SỬA CHỮ Ở data-status="..." -->
+                    <!-- VD: data-status="Working", data-status="Unstable", data-status="Patched" -->
+                    
                     <a href="javascript:void(0)" class="btn btn-other" 
                        data-name="Madium" 
+                       data-status="Working" 
                        data-icon="https://cdn.beacons.ai/user_content/o3PPAE7K1hUJHQwKTK2TF8MQo7I2/referenced_images/generated-images__link-in-bio__links-block__home__d32171f3-529e-440b-92c6-71d158a45235__d13589fa-9ba6-4e46-bd89-c39e16e688ba__2ef6439a-fa0b-4640-b454-32e8de1fe308.webp?t=1783163747685" 
                        data-unc="98%" 
                        data-sunc="100%" 
@@ -585,16 +587,15 @@
                             <img src="https://cdn.beacons.ai/user_content/o3PPAE7K1hUJHQwKTK2TF8MQo7I2/referenced_images/generated-images__link-in-bio__links-block__home__d32171f3-529e-440b-92c6-71d158a45235__d13589fa-9ba6-4e46-bd89-c39e16e688ba__2ef6439a-fa0b-4640-b454-32e8de1fe308.webp?t=1783163747685" alt="Icon">
                             <div class="btn-text-group">
                                 <span class="btn-name">Madium</span>
-                                <!-- Chỉnh sửa trạng thái ở dòng bên dưới -->
-                                <span class="status-badge badge-working"><span class="dot"></span>WORKING</span>
+                                <!-- Badge tự sinh bằng JS -->
                             </div>
                         </div>
                         <i class="fa-solid fa-arrow-right arrow-right"></i>
                     </a>
 
-                    <!-- NÚT 2: VELOCITY (UNSTABLE) -->
                     <a href="javascript:void(0)" class="btn btn-other" 
                        data-name="Velocity" 
+                       data-status="working" 
                        data-icon="https://cdn.beacons.ai/user_content/o3PPAE7K1hUJHQwKTK2TF8MQo7I2/referenced_images/generated-images__link-in-bio__links-block__home__0cf3b393-cff0-48d6-806c-87403b48af20__5cca49cf-6f3a-4ebb-887d-bc06bf969e87__63eb95dc-ec1b-4b7a-a44e-8a2196029559.webp?t=1783582661267" 
                        data-unc="99%" 
                        data-sunc="94%" 
@@ -604,16 +605,14 @@
                             <img src="https://cdn.beacons.ai/user_content/o3PPAE7K1hUJHQwKTK2TF8MQo7I2/referenced_images/generated-images__link-in-bio__links-block__home__0cf3b393-cff0-48d6-806c-87403b48af20__5cca49cf-6f3a-4ebb-887d-bc06bf969e87__63eb95dc-ec1b-4b7a-a44e-8a2196029559.webp?t=1783582661267" alt="Icon">
                             <div class="btn-text-group">
                                 <span class="btn-name">Velocity</span>
-                                <!-- Chỉnh sửa trạng thái ở dòng bên dưới -->
-                                <span class="status-badge badge-unstable"><span class="dot"></span>UNSTABLE</span>
                             </div>
                         </div>
                         <i class="fa-solid fa-arrow-right arrow-right"></i>
                     </a>
 
-                    <!-- NÚT 3: REAL (WORKING) -->
                     <a href="javascript:void(0)" class="btn btn-other" 
                        data-name="Real (Phải vượt link mới tải được)" 
+                       data-status="Working" 
                        data-icon="https://yt3.googleusercontent.com/_HbK3kduQIKLRkJeF4YPcMqAypJWJlkKT7NsUjPlL1x0UcYSJNhekJIs73xi4thhThw38gmc=s120-c-k-c0x00ffffff-no-rj" 
                        data-unc="99%" 
                        data-sunc="100%" 
@@ -623,16 +622,14 @@
                             <img src="https://yt3.googleusercontent.com/_HbK3kduQIKLRkJeF4YPcMqAypJWJlkKT7NsUjPlL1x0UcYSJNhekJIs73xi4thhThw38gmc=s120-c-k-c0x00ffffff-no-rj" alt="Icon">
                             <div class="btn-text-group">
                                 <span class="btn-name">Real (Phải vượt link...)</span>
-                                <!-- Chỉnh sửa trạng thái ở dòng bên dưới -->
-                                <span class="status-badge badge-working"><span class="dot"></span>WORKING</span>
                             </div>
                         </div>
                         <i class="fa-solid fa-arrow-right arrow-right"></i>
                     </a>
 
-                    <!-- NÚT 4: XENO (PATCHED) -->
                     <a href="javascript:void(0)" class="btn btn-other" 
                        data-name="Xeno" 
+                       data-status="working" 
                        data-icon="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFcbsPXEgWRy8HTTEcOFGUY0gIZRZWLO2UPJzrFL_WsQ&s=10" 
                        data-unc="< 84%" 
                        data-sunc="40%" 
@@ -642,16 +639,14 @@
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFcbsPXEgWRy8HTTEcOFGUY0gIZRZWLO2UPJzrFL_WsQ&s=10" alt="Icon">
                             <div class="btn-text-group">
                                 <span class="btn-name">Xeno</span>
-                                <!-- Chỉnh sửa trạng thái ở dòng bên dưới -->
-                                <span class="status-badge badge-patched"><span class="dot"></span>PATCHED</span>
                             </div>
                         </div>
                         <i class="fa-solid fa-arrow-right arrow-right"></i>
                     </a>
 
-                    <!-- NÚT 5: SOLARA (OUTDATED) -->
                     <a href="javascript:void(0)" class="btn btn-other" 
                        data-name="Solara" 
+                       data-status="working" 
                        data-icon="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyxCFdvPxMIpn6vYy1u0vIX8gOEdg1LSCryodcfu5wTHXPICgMKxVCmFo&s=10" 
                        data-unc="67%" 
                        data-sunc="46%" 
@@ -661,16 +656,14 @@
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyxCFdvPxMIpn6vYy1u0vIX8gOEdg1LSCryodcfu5wTHXPICgMKxVCmFo&s=10" alt="Icon">
                             <div class="btn-text-group">
                                 <span class="btn-name">Solara</span>
-                                <!-- Chỉnh sửa trạng thái ở dòng bên dưới -->
-                                <span class="status-badge badge-outdated"><span class="dot"></span>OUTDATED</span>
                             </div>
                         </div>
                         <i class="fa-solid fa-arrow-right arrow-right"></i>
                     </a>
 
-                    <!-- NÚT 6: VORTEX (WORKING) -->
                     <a href="javascript:void(0)" class="btn btn-other" 
                        data-name="Vortex" 
+                       data-status="Working" 
                        data-icon="https://tngexecutor.vercel.app/assets/logo.png" 
                        data-unc="99%" 
                        data-sunc="100%" 
@@ -680,8 +673,6 @@
                             <img src="https://tngexecutor.vercel.app/assets/logo.png" alt="Icon">
                             <div class="btn-text-group">
                                 <span class="btn-name">Vortex</span>
-                                <!-- Chỉnh sửa trạng thái ở dòng bên dưới -->
-                                <span class="status-badge badge-working"><span class="dot"></span>UNSTABLE</span>
                             </div>
                         </div>
                         <i class="fa-solid fa-arrow-right arrow-right"></i>
@@ -717,7 +708,7 @@
                     <span class="card-value" id="modal-sunc">N/A</span>
                 </div>
 
-                <!-- KHÔI PHỤC BẢNG AN TOÀN -->
+                <!-- BẢNG AN TOÀN -->
                 <div class="info-card safe-card">
                     <i class="fa-solid fa-shield-halved"></i>
                     <span class="card-label">AN TOÀN</span>
@@ -796,6 +787,31 @@
         }
         setInterval(updateClock, 1000);
         updateClock();
+
+        // ----- TỰ ĐỘNG TẠO HUY HIỆU STATUS TỪ DATA-STATUS -----
+        document.querySelectorAll('.btn-other').forEach(btn => {
+            const status = btn.getAttribute('data-status');
+            const textGroup = btn.querySelector('.btn-text-group');
+            
+            if (status && textGroup) {
+                const statusUpper = status.toUpperCase();
+                let badgeClass = '';
+                
+                // Xác định màu sắc theo chữ bạn ghi
+                if (statusUpper === 'WORKING') badgeClass = 'badge-working';
+                else if (statusUpper === 'UNSTABLE') badgeClass = 'badge-unstable';
+                else if (statusUpper === 'PATCHED') badgeClass = 'badge-patched';
+                else if (statusUpper === 'OUTDATED') badgeClass = 'badge-outdated';
+                else badgeClass = 'badge-working'; // Mặc định xanh lá nếu gõ sai
+
+                // Tạo thẻ huy hiệu và nhúng vào sau tên
+                const badge = document.createElement('span');
+                badge.className = `status-badge ${badgeClass}`;
+                badge.innerHTML = `<span class="dot"></span>${statusUpper}`;
+                
+                textGroup.appendChild(badge);
+            }
+        });
 
         // ----- XỬ LÝ MỞ POPUP & ĐIỀN DATA -----
         const modal = document.getElementById('info-modal');
